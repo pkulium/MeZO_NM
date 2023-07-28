@@ -709,6 +709,7 @@ class OurTrainer(Trainer):
         
         for name, param in self.named_parameters_to_optim:
             z = torch.normal(mean=0, std=1, size=param.data.size(), device=param.data.device, dtype=param.data.dtype)
+            z[param.data == 0] = 0
             param.data = param.data + scaling_factor * z * self.args.zo_eps
 
 
@@ -800,6 +801,7 @@ class OurTrainer(Trainer):
         for name, param in self.named_parameters_to_optim:
             # Resample z
             z = torch.normal(mean=0, std=1, size=param.data.size(), device=param.data.device, dtype=param.data.dtype)
+            z[param.data == 0] = 0
             if "bias" not in name and "layer_norm" not in name and "layernorm" not in name:
                 param.data = param.data - self._get_learning_rate() * (self.projected_grad * z + args.weight_decay * param.data)
             else:
