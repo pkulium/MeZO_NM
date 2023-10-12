@@ -56,7 +56,7 @@ echo "TRAIN/EVAL STEPS: $STEPS/$EVAL_STEPS"
 echo "MODE: $MODE"
 echo "Extra args: $EXTRA_ARGS $TASK_ARGS"
 
-
+git pull
 
 ml-gpu /work/LAS/wzhang-lab/mlgpuvenv-20220928/bin/python  -m pdb run.py \
     --model_name $MODEL \
